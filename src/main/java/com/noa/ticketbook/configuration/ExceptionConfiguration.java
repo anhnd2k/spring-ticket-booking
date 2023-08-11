@@ -80,7 +80,8 @@ public class ExceptionConfiguration {
     public ResponseEntity<ResponseObject> handleException(Exception exception) {
         log.error(exception.getMessage(), exception);
         return ResponseFactoryUtils.failWithDomainException(
-                new DomainException(CommonMessage.INTERNAL_SERVER_ERROR));
+                new DomainException(CommonMessage.INTERNAL_SERVER_ERROR)
+        );
     }
 }
 

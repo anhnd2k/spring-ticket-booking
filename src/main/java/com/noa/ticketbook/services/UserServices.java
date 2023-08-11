@@ -4,15 +4,12 @@ import com.noa.ticketbook.entity.UsersEntity;
 import com.noa.ticketbook.exception.DomainException;
 import com.noa.ticketbook.exception.message.CommonMessage;
 import com.noa.ticketbook.repository.UserRepository;
-import com.noa.ticketbook.untils.ResponseFactoryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServices {
@@ -22,7 +19,24 @@ public class UserServices {
         return userRepository.findAll();
     }
 
-    public Object saveUser(UsersEntity user) {
+    public UsersEntity saveUser(UsersEntity user) {
         return userRepository.save(user);
+    }
+
+    public UsersEntity getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new DomainException(
+                        "",
+                        "Người dùng không tồn tại",
+                        HttpStatus.BAD_REQUEST
+                ));
+    }
+    public UsersEntity updateUser(UsersEntity updatedUser) {
+        // Update user properties based on updatedUser
+        return userRepository.save(updatedUser);
+    }
+
+    public void deleteUserById(Long userId){
+        userRepository.deleteById(userId);
     }
 }
