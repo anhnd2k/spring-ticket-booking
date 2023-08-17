@@ -39,7 +39,8 @@ public enum CommonMessage implements DomainMessage{
     ERR_ROLLBACK_CA_FROM_MERCURY("RB-029", "Lỗi trả về CA", HttpStatus.BAD_REQUEST),
     ERR_CURRENT_USER_ROLE_NOT_ACCEPT("RB-030", "Lỗi không xác định được quyền của người xử lý", HttpStatus.BAD_REQUEST),
     ERR_GET_GET_LEGAL_REPRESENTATION("RB-031", "Lỗi lấy thông tin đại diện User", HttpStatus.INTERNAL_SERVER_ERROR),
-    ERR_GET_CHECKLIST("RB-032", "Lỗi lấy checklist của hồ sơ", HttpStatus.BAD_REQUEST);
+    ERR_GET_CHECKLIST("RB-032", "Lỗi lấy checklist của hồ sơ", HttpStatus.BAD_REQUEST),
+    USER_NOT_FOUND("UF-404", "Người dùng không tồn tại!", HttpStatus.BAD_REQUEST);
     private String code;
     private String message;
     private HttpStatus statusCode;

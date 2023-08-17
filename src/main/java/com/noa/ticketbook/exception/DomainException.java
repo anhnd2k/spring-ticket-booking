@@ -10,9 +10,6 @@ import java.util.List;
 
 @Getter
 public class DomainException extends RuntimeException{
-
-    private static final long serialVersionUID = 2376491613927254481L;
-
     //  @Transient
     private final transient DomainMessage error;
 

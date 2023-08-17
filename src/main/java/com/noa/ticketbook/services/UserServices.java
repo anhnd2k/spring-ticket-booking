@@ -25,11 +25,7 @@ public class UserServices {
 
     public UsersEntity getUserById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new DomainException(
-                        "",
-                        "Người dùng không tồn tại",
-                        HttpStatus.BAD_REQUEST
-                ));
+                .orElseThrow(() -> new DomainException(CommonMessage.USER_NOT_FOUND));
     }
     public UsersEntity updateUser(UsersEntity updatedUser) {
         // Update user properties based on updatedUser

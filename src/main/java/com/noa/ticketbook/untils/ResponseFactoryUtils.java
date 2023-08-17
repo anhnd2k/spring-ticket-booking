@@ -15,10 +15,9 @@ import java.util.ResourceBundle;
 public class ResponseFactoryUtils {
 
     public static ResponseEntity<ResponseObject> success(){
-        return ResponseEntity.ok(new ResponseObject().withStatus(CommonMessage.SUCCESS.getStatusCode())
-                .withMessage(
-                    CommonMessage.SUCCESS.getMessage()
-                )
+        return ResponseEntity.ok(new ResponseObject()
+                .withStatus(CommonMessage.SUCCESS.getStatusCode())
+                .withMessage(CommonMessage.SUCCESS.getMessage())
         );
     }
 
@@ -38,8 +37,10 @@ public class ResponseFactoryUtils {
         );
     }
 
-    public static ResponseEntity<ResponseObject> failWithDomainException(HttpStatus code, String message,
-                                                                      HttpStatus statusCode) {
+    public static ResponseEntity<ResponseObject> failWithDomainException(
+            HttpStatus code,
+            String message,
+            HttpStatus statusCode) {
         return ResponseEntity.status(statusCode)
                 .body(new ResponseObject().withStatus(code).withMessage(message));
     }
