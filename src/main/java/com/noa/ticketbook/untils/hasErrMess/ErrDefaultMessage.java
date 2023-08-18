@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ErrDefaultMessage {
 
 
@@ -18,5 +21,13 @@ public class ErrDefaultMessage {
                         status
                 )
         );
+    }
+
+    public static Map<String, Object> createErrorResponse(String message) {
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("data", null);
+        responseData.put("message", message);
+        responseData.put("status", HttpStatus.UNAUTHORIZED.value());
+        return responseData;
     }
 }

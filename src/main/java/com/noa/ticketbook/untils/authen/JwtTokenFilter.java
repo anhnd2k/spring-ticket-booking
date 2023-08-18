@@ -1,8 +1,12 @@
 package com.noa.ticketbook.untils.authen;
 
+import com.noa.ticketbook.exception.DomainException;
 import com.noa.ticketbook.services.UserDetailsServiceImpl;
+import com.noa.ticketbook.untils.ResponseFactoryUtils;
 import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
@@ -38,7 +43,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             try {
                 username = jwtTokenUtil.extractUsername(jwtToken);
             } catch (IllegalArgumentException e) {
-                // Handle invalid token
+
             } catch (ExpiredJwtException e) {
                 // Handle expired token
             }
@@ -52,6 +57,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                         userDetails, null, userDetails.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            } else {
+
             }
         }
         filterChain.doFilter(request, response);

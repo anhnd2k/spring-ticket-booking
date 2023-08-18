@@ -1,5 +1,6 @@
 package com.noa.ticketbook.models;
 import lombok.*;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.springframework.http.HttpStatus;
 
 @Getter

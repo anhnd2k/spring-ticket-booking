@@ -1,5 +1,6 @@
 package com.noa.ticketbook.configuration.authen;
 
+import com.noa.ticketbook.services.UserDetailsServiceImpl;
 import com.noa.ticketbook.untils.authen.JwtTokenFilter;
 import com.noa.ticketbook.untils.authen.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class SecurityConfig {
     private JwtTokenFilter jwtTokenFilter;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -67,10 +68,12 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/user/**").permitAll()
+//                .antMatchers("/user/**").permitAll()
                 .antMatchers("/api/user").hasRole("USER") // Configure roles for specific endpoints
-                .anyRequest().authenticated()
+                .anyRequest().authenticated() // yêu cầu tất cả các yêu cầu còn lại cần phải xác thực
                 .and()
+                //Cấu hình quản lý phiên làm việc, trong trường hợp này là phiên không lưu trạng thái (stateless).
+                //Điều này thường được sử dụng khi sử dụng mã JWT để xác thực, vì phiên không cần được duy trì.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

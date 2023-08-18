@@ -15,18 +15,21 @@ import java.util.ResourceBundle;
 public class ResponseFactoryUtils {
 
     public static ResponseEntity<ResponseObject> success(){
-        return ResponseEntity.ok(new ResponseObject().withStatus(CommonMessage.SUCCESS.getStatusCode())
-                .withMessage(
-                    CommonMessage.SUCCESS.getMessage()
-                )
+        return ResponseEntity.ok(
+                new ResponseObject()
+                        .withStatus(CommonMessage.SUCCESS.getStatusCode())
+                        .withMessage(
+                            CommonMessage.SUCCESS.getMessage()
+                        )
         );
     }
 
     public static ResponseEntity<ResponseObject> success(Object data){
-        return ResponseEntity.ok(new ResponseObject()
-                .withStatus(CommonMessage.SUCCESS.getStatusCode())
-                .withMessage(CommonMessage.SUCCESS.getMessage())
-                .withData(data)
+        return ResponseEntity.ok(
+                new ResponseObject()
+                    .withStatus(CommonMessage.SUCCESS.getStatusCode())
+                    .withMessage(CommonMessage.SUCCESS.getMessage())
+                    .withData(data)
         );
     }
 

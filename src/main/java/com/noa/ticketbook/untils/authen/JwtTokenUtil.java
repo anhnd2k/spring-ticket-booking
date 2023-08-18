@@ -1,9 +1,11 @@
 package com.noa.ticketbook.untils.authen;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.noa.ticketbook.exception.DomainException;
+import com.noa.ticketbook.untils.ResponseFactoryUtils;
+import com.noa.ticketbook.untils.hasErrMess.ErrDefaultMessage;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,8 @@ public class JwtTokenUtil {
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("username", userDetails.getUsername());
+        claims.put("role", "user");
         return createToken(claims, userDetails.getUsername());
     }
 
